@@ -1,0 +1,114 @@
+<?php
+/**
+ * Attachment list template on product page
+ * Virtina
+ * @package    Virtina_Attachments
+ * @copyright  Copyright (coffee) 2015-2016 Virtina. (http://www.virtina.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+	$attachments = $this->getAttachmentCollection();
+	$helper = Mage::helper('attachments/attachment');
+
+	if ($attachments && $attachments->count() > 0) :?>
+	<script type="text/javascript">
+
+		// Limit attachment title length	
+		function attachTitleResponsive(){
+			var width 	= document.viewport.getWidth();
+			var height 	= document.viewport.getHeight();
+			var dims 	= document.viewport.getDimensions(); 
+			var width 	= dims.width;
+			var attachIdstr	= document.getElementById('atids').value;
+			
+			if(attachIdstr){
+				var attachIdArray 	= attachIdstr.split(",");
+			
+				for (i = 0; i < parseInt(attachIdArray.length); i++) {
+					var atid 	= 'attach-title-'+attachIdArray[i];
+					var atidFull 	= 'attach-title-full-'+attachIdArray[i];				
+
+					var attachSpanObj = document.getElementById(atid);
+					var attachObj 	  = document.getElementById(atidFull);
+					
+						var attachTitle	= "";
+						attachTitle 	= attachObj.value;				
+					attachTitle 	= attachTitle.replace(/^\s+|\s+$/gm,'');				
+					
+					var attachSpanText	= attachTitle;				
+					
+					if((width>='100')&&(width<'360')){
+						if(attachTitle.length >= 25){
+							attachSpanText	=	attachTitle.substring(0, 25)+'..';
+						}
+						
+					} else 	if((width>='360')&&(width<'480')){
+						if(attachTitle.length >= 30){
+							attachSpanText	=	attachTitle.substring(0, 30)+'..';
+						}
+					} else 	if((width>='480')&&(width<'640')){ 	
+						if(attachTitle.length >= 40){
+							attachSpanText	=	attachTitle.substring(0, 40)+'..';
+						}
+					} else 	if((width>='640')&&(width<'768')){ 	
+						if(attachTitle.length >= 50){
+							attachSpanText	=	attachTitle.substring(0, 50)+'..';
+						}
+					}
+					
+					if (attachSpanObj.innerText) {
+						attachSpanObj.innerText = attachSpanText;
+					} else if (attachSpanObj.textContent) {
+						attachSpanObj.textContent = attachSpanText;   
+					}					    
+					
+				}
+			}
+		
+		}
+
+		// Executing Function Upon Page Load
+		Event.observe(window, "dom:loaded", attachTitleResponsive, true);
+		 
+		// Executing Function Upon Browser Resize
+		Event.observe(window, "resize", attachTitleResponsive, true);
+		
+	</script>
+	<div class="attach-tab">
+	<?php
+	if(Mage::helper('attachments/data')->getAttachHeadFromConfig()){
+	?>
+		<h1><?php echo Mage::helper('attachments/data')->getAttachHeadFromConfig(); ?></h1>
+	<?php
+	}
+	?>
+	</div>
+	<div class="box-collateral box-attachments box-up-sell">
+		<?php $atids = ""; ?>
+		<ul class="attachment-outer">
+		<?php foreach ($attachments as $_attachment) : ?>
+				<?php $_fileSize = $helper->getFileSize($_attachment->getAttachmentPath()); ?>
+				<li><a href="<?php echo $_attachment->getAttachmentUrl(); ?>" title="<?php echo $_attachment->getTitle()?>" target="_blank">
+				<?php 
+				if(Mage::getStoreConfig('virtina_attachments/attachment/filetypestatus')){
+					echo $_attachment->getIcon();
+				}
+				?>
+				<span id="attach-title-<?php echo $_attachment->getId()?>"><?php 					
+				$attachTitle = $_attachment->getTitle();			
+				echo $attachTitle;
+				$atids .= $_attachment->getId().",";
+				?></span>
+				<?php echo $this->__(' (Size: ' .$_fileSize  . ')'); ?>
+				</a>
+				<input type="hidden" id="attach-title-full-<?php echo $_attachment->getId()?>" name="attach-title-full-<?php echo $_attachment->getId()?>" value="<?php echo $attachTitle; ?>" />
+				</li>
+		
+		<?php endforeach; ?>    
+		</ul>
+		<?php $atids = substr($atids, 0, -1); ?>
+		<input type="hidden" id="atids" name="atids" value="<?php echo $atids; ?>" />
+	</div>
+<?php else:?>  
+	<div class="box-collateral box-attachments box-up-sell"><?php echo $this->__('No attachments found!!!')?></div>
+<?php endif; ?>

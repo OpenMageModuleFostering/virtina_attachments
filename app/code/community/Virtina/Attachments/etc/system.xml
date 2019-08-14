@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Virtina
+ * @package    Virtina_Attachments
+ * @copyright  Copyright (coffee) 2015-2016 Virtina. (http://www.virtina.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+--> 
+<config>
+	<tabs>
+        <virtina_extensions translate="label" module="attachments">
+			<label>Virtina Extentions</label>
+            <sort_order>100</sort_order>
+        </virtina_extensions>
+    </tabs>	
+    <sections>
+		<virtina_attachments>
+            <class>separator-top</class>
+            <label>Catalog Attachments</label>
+            <tab>virtina_extensions</tab>
+            <sort_order>90</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>            
+            <groups>
+                	<attachment translate="label" module="attachments">
+                    <label>Catalog Attachment Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[We can <em>configure</em> the <strong>Catalog Attachment Extension</strong> here.]]></comment>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Catalog attachment</label>
+                            <comment>Enable / Disable the extension</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+						<tabheading translate="label">
+							<label>Attachment TAB heading</label>
+							<depends><enable>1</enable></depends>
+							<comment>Default: Attachments</comment>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</tabheading>		
+						<attachhead translate="label">
+							<label>Attachments heading</label>
+							<depends><enable>1</enable></depends>							
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</attachhead>
+						<filetypestatus translate="label">
+							<label>Enable display file type image</label>
+							<depends><enable>1</enable></depends>	
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</filetypestatus>
+						<attachallowed translate="label">
+							<label>Allowed file types</label>
+							<depends><enable>1</enable></depends>
+							<comment>Enter allowed file extensions seperated by comma. Eg:- jpg,png,bmp,csv,zip,mp3,mp4,zip,pdf,doc,docx,xls,xlx,txt</comment>							
+							<frontend_type>textarea</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</attachallowed>						
+                    </fields>
+            		</attachment>
+            </groups>
+        </virtina_attachments>
+    </sections>
+</config>

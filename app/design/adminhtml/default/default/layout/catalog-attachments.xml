@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Virtina
+ * @package    Virtina_Attachments
+ * @copyright  Copyright (coffee) 2015-2016 Virtina. (http://www.virtina.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout>
+	
+	<!-- Attachment index action -->
+    <adminhtml_attachments_attachment_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>attachments/attachment</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="attachments/adminhtml_attachment" name="attachment" />
+        </reference>
+    </adminhtml_attachments_attachment_index>
+    
+    <!-- Attachment grid action -->
+    <adminhtml_attachments_attachment_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="attachments/adminhtml_attachment_grid" name="attachment_grid"/>
+        </block>
+    </adminhtml_attachments_attachment_grid>
+    
+    <!-- Attachment add/edit action -->
+    <adminhtml_attachments_attachment_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>attachments/attachment</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="attachments/adminhtml_attachment_edit" name="attachment_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="attachments/adminhtml_attachment_edit_tabs" name="attachment_tabs"></block>
+        </reference>
+    </adminhtml_attachments_attachment_edit>
+    
+    <!-- Attachment attachment products -->
+    <adminhtml_attachments_attachment_products>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="attachments/adminhtml_attachment_edit_tab_product" name="attachment.edit.tab.product"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>attachment.edit.tab.product</grid_block_name>
+                            <data_callback>getSelectedProducts</data_callback>
+                            <hidden_input_name>products</hidden_input_name>
+                            <reload_param_name>attachment_products</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_attachments_attachment_products>
+    
+    <!-- Attachment attachment products grid -->
+    <adminhtml_attachments_attachment_productsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="attachments/adminhtml_attachment_edit_tab_product" name="attachment.edit.tab.product"/>
+        </block>
+    </adminhtml_attachments_attachment_productsgrid>
+    
+	<!-- Attachment product attachments -->
+    <adminhtml_attachments_attachment_catalog_product_attachments>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="attachments/adminhtml_catalog_product_edit_tab_attachment" name="product.edit.tab.attachment"/>
+            <block type="adminhtml/widget_grid_serializer" name="attachment_grid_serializer">
+                <reference name="attachment_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>product.edit.tab.attachment</grid_block_name>
+                        <data_callback>getSelectedAttachments</data_callback>
+                        <hidden_input_name>attachments</hidden_input_name>
+                        <reload_param_name>product_attachments</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_attachments_attachment_catalog_product_attachments>
+    
+    <!-- Attachment product attachments grid -->
+    <adminhtml_attachments_attachment_catalog_product_attachmentsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="attachments/adminhtml_catalog_product_edit_tab_attachment" name="product.edit.tab.attachment"/>
+        </block>
+    </adminhtml_attachments_attachment_catalog_product_attachmentsgrid>
+</layout>
