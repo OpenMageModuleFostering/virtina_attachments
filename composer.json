@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Virtina_Attachments",
+    "name": "OpenMageModuleFostering\/Virtina_Attachments",
     "type": "magento-module",
     "license": "OSL-3.0",
     "homepage": "",
     "description": "The Catalog Attachments extension is a simple tool to upload product related files through admin panel and display the files in the product view page. There is a configuration section in the admin side to configure the module.",
     "authors": [
-    {
-        "name": "Virtina",
-        "email": "gigijk@virtina.com"
-    }
-],
+        {
+            "name": "Virtina",
+            "email": "gigijk@virtina.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
