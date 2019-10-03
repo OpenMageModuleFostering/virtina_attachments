@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 The Catalog Attachments extension is a simple tool to upload product related files through admin panel and display the files in the product view page. There is a configuration section in the admin side to configure the module.
